@@ -28,9 +28,8 @@ const Login = ({ onLogin }) => {
 
     return (
         <>
-            {/* Enhanced Militarysystem Header */}
             <div className="text-3xl font-bold uppercase text-center mt-8 text-blue-800 tracking-wide">
-                MilitarySystem
+                Military System
             </div>
 
             {/* Login Card */}
