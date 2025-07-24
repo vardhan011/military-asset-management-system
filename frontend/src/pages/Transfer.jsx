@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api'; // ✅ Reuse configured Axios
 
 const Transfer = () => {
     const [toBaseId, setToBaseId] = useState('');
@@ -10,8 +10,8 @@ const Transfer = () => {
     const handleTransfer = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post(
-                'http://localhost:5000/api/transfers',
+            const res = await api.post(
+                '/transfers',
                 { toBaseId, assetType, quantity: Number(quantity) },
                 {
                     headers: {

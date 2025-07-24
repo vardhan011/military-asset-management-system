@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from "../api"; // ✅ Using central Axios instance
 
 const Purchase = () => {
     const [assetType, setAssetType] = useState('');
@@ -9,8 +9,8 @@ const Purchase = () => {
     const handlePurchase = async () => {
         try {
             const token = localStorage.getItem('token');
-            const res = await axios.post(
-                'http://localhost:5000/api/purchases',
+            const res = await api.post(
+                '/purchases',
                 { assetType, quantity: Number(quantity) },
                 {
                     headers: {

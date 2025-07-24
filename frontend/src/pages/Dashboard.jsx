@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
 import jwtDecode from 'jwt-decode';
+import api from '../api';
 
 const Dashboard = () => {
     const [dashboardData, setDashboardData] = useState([]);
-    // const [logs, setLogs] = useState([]);
     const [userRole, setUserRole] = useState('');
     const token = localStorage.getItem('token');
 
@@ -18,11 +17,10 @@ const Dashboard = () => {
     useEffect(() => {
         const fetchDashboard = async () => {
             try {
-                const res = await axios.get('http://localhost:5000/api/dashboard', {
+                const res = await api.get('/dashboard', {
                     headers: { Authorization: `Bearer ${token}` }
                 });
                 setDashboardData(res.data.dashboard);
-                // setLogs(res.data.recentLogs || []);
             } catch (err) {
                 console.error('Dashboard fetch failed:', err.message);
             }
@@ -72,7 +70,6 @@ const Dashboard = () => {
                     </tbody>
                 </table>
             </div>
-
         </div>
     );
 };

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const Assignment = () => {
     const [form, setForm] = useState({
@@ -8,7 +8,6 @@ const Assignment = () => {
         assignedTo: '',
         type: 'assigned'
     });
-
 
     const [message, setMessage] = useState('');
 
@@ -24,7 +23,7 @@ const Assignment = () => {
         const token = localStorage.getItem('token');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/assignments', form, {
+            const res = await api.post('/assignments', form, {
                 headers: {
                     Authorization: `Bearer ${token}`
                 }
@@ -75,7 +74,6 @@ const Assignment = () => {
                     <option value="assigned">Assign</option>
                     <option value="expended">Expend</option>
                 </select>
-
 
                 <button
                     type="submit"

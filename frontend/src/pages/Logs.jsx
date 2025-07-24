@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import axios from 'axios';
+import api from '../api';
 
 const Logs = () => {
     const [logs, setLogs] = useState([]);
@@ -8,7 +8,7 @@ const Logs = () => {
         const fetchLogs = async () => {
             try {
                 const token = localStorage.getItem('token');
-                const res = await axios.get('http://localhost:5000/api/logs', {
+                const res = await api.get('/logs', {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setLogs(res.data);
@@ -38,7 +38,9 @@ const Logs = () => {
                             <tr key={log._id} className="border-t">
                                 <td className="p-2 border">{new Date(log.timestamp).toLocaleString()}</td>
                                 <td className="p-2 border">{log.action}</td>
-                                <td className="p-2 border">{log.userId?.name || 'Unknown'} ({log.userId?.role})</td>
+                                <td className="p-2 border">
+                                    {log.userId?.name || 'Unknown'} ({log.userId?.role})
+                                </td>
                                 <td className="p-2 border">
                                     <pre className="whitespace-pre-wrap break-words text-xs">
                                         {JSON.stringify(log.details, null, 2)}
