@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import api from '../api'; // ✅ Use your custom axios instance
 
 const Login = ({ onLogin }) => {
     const [email, setEmail] = useState('');
@@ -13,7 +13,7 @@ const Login = ({ onLogin }) => {
         setError('');
 
         try {
-            const res = await axios.post('http://localhost:5000/api/login', {
+            const res = await api.post('/login', {
                 email,
                 password,
             });
@@ -32,7 +32,6 @@ const Login = ({ onLogin }) => {
                 Military System
             </div>
 
-            {/* Login Card */}
             <div className="max-w-md mx-auto mt-10 p-6 bg-white shadow-lg rounded-lg border border-gray-200">
                 <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">Login</h2>
                 <form onSubmit={handleLogin} className="space-y-5">
