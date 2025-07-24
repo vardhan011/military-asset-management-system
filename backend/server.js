@@ -14,11 +14,12 @@ const assignmentRoutes = require('./routes/assigments');
 
 
 const app = express();
-app.use(express.json());
+
 app.use(cors({
     origin: 'https://military-asset-management-system-delta.vercel.app',
     credentials: true,
 }));
+app.use(express.json());
 
 app.use(morgan('dev'));
 app.use('/api', authRoutes);
